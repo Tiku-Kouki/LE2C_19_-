@@ -22,10 +22,13 @@ void ClearScene::Update() {
 
 
 	
-	/*if (input_->IsPressMouse(0)) {
+	if (input_->IsPressMouse(0)) {
 
 		isSceneEnd = true;
-	}*/
+	} else 
+	{
+		isSceneEnd = false;
+	}
 
 
 }

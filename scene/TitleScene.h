@@ -54,6 +54,7 @@ private: // メンバ変数
 	Audio* audio_ = nullptr;
 
 	
+	Sprite* title_ = nullptr;
 
 };
 

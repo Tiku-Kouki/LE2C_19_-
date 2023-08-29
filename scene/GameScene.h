@@ -77,7 +77,18 @@ public: // メンバ関数
 	 bool isGameOver = false;
 	 bool IsGameOver() { return isGameOver; }
 
-	 SceneType NextScene() { return SceneType::kClearGame; }
+	 SceneType NextScene() { 
+
+	if (isSceneEnd == true) 
+	{
+	 return SceneType::kClearGame;
+	}else
+	if (isGameOver == true) {
+	 return SceneType::kGameOver;
+	}
+	return SceneType::kGamePlay;
+	 }
+
 	 SceneType GameOver() { return SceneType::kGameOver; }
 
  private: // メンバ変数

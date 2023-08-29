@@ -21,7 +21,10 @@ void GameOverScene::Update() {
 if (input_->IsPressMouse(0)) {
 
 		isSceneEnd = true;
-	}
+} else
+{
+	isSceneEnd = false;
+}
 
 }
 

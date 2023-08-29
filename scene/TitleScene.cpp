@@ -12,6 +12,10 @@ TitleScene::TitleScene()
 
 TitleScene::~TitleScene()
 {
+	delete title_; 
+
+
+
 }
 
 void TitleScene::Initialize()
@@ -20,18 +24,21 @@ void TitleScene::Initialize()
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
 
+	
 
 }
 
 void TitleScene::Update()
 {
-	isSceneEnd = false;
-	if (input_->IsPressMouse(0)) {
 	
 	
-	isSceneEnd = true;
-	} 
-
+		if (input_->IsPressMouse(0)) {
+			
+			isSceneEnd = true;
+		} else {
+			isSceneEnd = false;
+		}
+	
 
 
 }

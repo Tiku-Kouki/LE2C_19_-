@@ -36,7 +36,7 @@ void GameScene::Initialize() {
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
 	textureHandle_ = TextureManager::Load("blue.png");
-	textureHandle2_ = TextureManager::Load("tex1.png");
+	textureHandle2_ = TextureManager::Load("enemy.png");
 
 	model_ = Model::Create();
 	playerModel_ = Model::CreateFromOBJ("player", true);
@@ -97,17 +97,13 @@ void GameScene::Update() {
 	if (input_->IsPressMouse(1)) {
 
 		isSceneEnd = true;
+	}else
+	{
+		isSceneEnd = false;
 	}
 
 
-#ifdef _DEBUG
 
-	if (input_->IsPressMouse(1)) {
-
-		isSceneEnd = true;
-	}
-
-#endif // DEBUG
 	if (isDebugCameraActive_ == true) {
 		debugCamera_->Update();
 		viewProjection_.matView = debugCamera_->GetViewProjection().matView;
@@ -123,6 +119,11 @@ void GameScene::Update() {
 	}
 
 	player_->Update(viewProjection_);
+
+	if (isGameOver == true || isSceneEnd == true) {
+
+		LoadEnemyPopData();
+	}
 
 	
 	UpdataEnemyPopCommands();
@@ -141,6 +142,15 @@ void GameScene::Update() {
 	skydome_->Update();
 
 	CheckAllCollisions();
+
+	#ifdef _DEBUG
+
+	if (input_->IsPressMouse(1)) {
+
+		isSceneEnd = true;
+	}
+
+#endif // DEBUG
 
 	/*ImGui::Begin("camera");
 	ImGui::DragFloat3("Translation", &viewProjection_.translation_.x, 0.01f);

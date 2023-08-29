@@ -78,6 +78,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	gameOverScene = new GameOverScene();
 	gameOverScene->Initialize();
 
+	clearScene = new ClearScene();
+	clearScene->Initialize();
+
 
 	SceneType sceneNo = SceneType::kTitle;
 
@@ -111,16 +114,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			// ゲームシーンの毎フレーム処理
 			gameScene->Update();
 
-			if (gameScene->IsGameOver()) {
-
-			sceneNo = gameScene->GameOver();
-			}
-
-			if (gameScene->IsSceneEnd()) {
+			
 
 			sceneNo = gameScene->NextScene();
 
-			}
+			
 
 			break;
 		case SceneType::kGameOver:
