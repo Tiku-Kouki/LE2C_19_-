@@ -1,4 +1,10 @@
 #include "ClearScene.h"
+#include "AxisIndicator.h"
+#include "ImGuiManager.h"
+#include "TextureManager.h"
+#include <cassert>
+#include <math.h>
+#include<fstream>
 
 ClearScene::ClearScene() {}
 
@@ -6,12 +12,23 @@ ClearScene::~ClearScene() {}
 
 void ClearScene::Initialize() {
 
-dxCommon_ = DirectXCommon::GetInstance();
+	isSceneEnd = false;
+	dxCommon_ = DirectXCommon::GetInstance();
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
 }
 
-void ClearScene::Update() {}
+void ClearScene::Update() {
+
+
+	
+	/*if (input_->IsPressMouse(0)) {
+
+		isSceneEnd = true;
+	}*/
+
+
+}
 
 void ClearScene::Draw() {
 

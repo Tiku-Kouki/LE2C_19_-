@@ -25,12 +25,12 @@ void TitleScene::Initialize()
 
 void TitleScene::Update()
 {
-
+	isSceneEnd = false;
 	if (input_->IsPressMouse(0)) {
 	
 	
-	
-	}
+	isSceneEnd = true;
+	} 
 
 
 

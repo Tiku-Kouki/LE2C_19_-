@@ -1,13 +1,14 @@
 #include "Audio.h"
 #include "AxisIndicator.h"
 #include "DirectXCommon.h"
-#include "GameScene.h"
-#include "TitleScene.h"
 #include "ImGuiManager.h"
 #include "PrimitiveDrawer.h"
 #include "TextureManager.h"
 #include "WinApp.h"
-
+#include "GameScene.h"
+#include "TitleScene.h"
+#include "GameOverScene.h"
+#include "ClearScene.h"
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
@@ -18,8 +19,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Audio* audio = nullptr;
 	AxisIndicator* axisIndicator = nullptr;
 	PrimitiveDrawer* primitiveDrawer = nullptr;
+	
 	GameScene* gameScene = nullptr;
 	TitleScene* titleScene = nullptr;
+	GameOverScene* gameOverScene = nullptr;
+	ClearScene* clearScene = nullptr;
+
+
 
 
 	// ゲームウィンドウの作成
@@ -69,7 +75,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	gameScene = new GameScene();
 	gameScene->Initialize();
 
-	SceneType sceneNo = SceneType::kGamePlay;
+	gameOverScene = new GameOverScene();
+	gameOverScene->Initialize();
+
+
+	SceneType sceneNo = SceneType::kTitle;
 
 
 
@@ -114,11 +124,26 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			break;
 		case SceneType::kGameOver:
+
+				gameOverScene->Update();
+
+			if (gameOverScene->IsSceneEnd()) {
+
+			sceneNo = gameOverScene->NextScene();
+			}
+
 			break;
 		case SceneType::kClearGame:
+			
+			clearScene->Update();
+
+			if (clearScene->IsSceneEnd()) {
+
+			sceneNo = clearScene->NextScene();
+			}
+
 			break;
-		default:
-			break;
+		
 		}
 		
 
@@ -142,8 +167,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			break;
 		case SceneType::kClearGame:
 			break;
-		default:
-			break;
+		
 		}
 		
 

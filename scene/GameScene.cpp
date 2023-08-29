@@ -15,7 +15,7 @@ GameScene::~GameScene() {
 	delete player_;
 	delete debugCamera_;
 
-	
+	delete playerModel_;
 
 	delete modelSkydome_;
 	delete railCamera_;
@@ -94,14 +94,18 @@ void GameScene::Update() {
 		return false;
 	});
 
+	if (input_->IsPressMouse(1)) {
 
+		isSceneEnd = true;
+	}
 
 
 #ifdef _DEBUG
 
-	/*if (input_->PushKey(DIK_SPACE)) {
-	    isDebugCameraActive_ = true;
-	}*/
+	if (input_->IsPressMouse(1)) {
+
+		isSceneEnd = true;
+	}
 
 #endif // DEBUG
 	if (isDebugCameraActive_ == true) {

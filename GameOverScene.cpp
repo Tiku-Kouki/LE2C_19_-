@@ -1,4 +1,10 @@
 #include "GameOverScene.h"
+#include "AxisIndicator.h"
+#include "ImGuiManager.h"
+#include "TextureManager.h"
+#include <cassert>
+#include <math.h>
+#include<fstream>
 
 GameOverScene::GameOverScene() {}
 
@@ -10,7 +16,14 @@ void GameOverScene::Initialize() {
 	audio_ = Audio::GetInstance();
 }
 
-void GameOverScene::Update() {}
+void GameOverScene::Update() {
+
+if (input_->IsPressMouse(0)) {
+
+		isSceneEnd = true;
+	}
+
+}
 
 void GameOverScene::Draw() {
 
