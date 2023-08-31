@@ -80,9 +80,9 @@ void GameScene::Initialize() {
 	// レティクル用テクスチャ取得
 	uint32_t lifeTitle = TextureManager::Load("Life.png");
 
-	lifeUI[1] = Sprite::Create(lifeTitle, {18.0f, 38.0f}, {1.0f, 1.0f, 1.0f, 1}, {0.5f, 0.5f});
-	lifeUI[2] = Sprite::Create(lifeTitle, {59.0f, 38.0f}, {1.0f, 1.0f, 1.0f, 1}, {0.5f, 0.5f});
-	lifeUI[3] = Sprite::Create(lifeTitle, {99.0f, 38.0f}, {1.0f, 1.0f, 1.0f, 1}, {0.5f, 0.5f});
+	lifeUI[1] = Sprite::Create(lifeTitle, {33.0f, 28.0f}, {1.0f, 1.0f, 1.0f, 1}, {0.5f, 0.5f});
+	lifeUI[2] = Sprite::Create(lifeTitle, {72.0f, 28.0f}, {1.0f, 1.0f, 1.0f, 1}, {0.5f, 0.5f});
+	lifeUI[3] = Sprite::Create(lifeTitle, {111.0f,28.0f}, {1.0f, 1.0f, 1.0f, 1}, {0.5f, 0.5f});
 }
 
 void GameScene::Update() {
