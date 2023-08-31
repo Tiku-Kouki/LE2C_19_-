@@ -122,6 +122,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			break;
 		case SceneType::kGameOver:
+			gameScene->Reset();
 
 				gameOverScene->Update();
 
@@ -132,7 +133,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			break;
 		case SceneType::kClearGame:
-			
+			gameScene->Reset();
 			clearScene->Update();
 
 			if (clearScene->IsSceneEnd()) {
@@ -156,14 +157,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		switch (sceneNo) {
 		case SceneType::kTitle:
+
+			titleScene->Draw();
 			break;
 		case SceneType::kGamePlay:
 			// ゲームシーンの描画
 			gameScene->Draw();
 			break;
 		case SceneType::kGameOver:
+
+			gameOverScene->Draw();
 			break;
 		case SceneType::kClearGame:
+
+			clearScene->Draw();
 			break;
 		
 		}

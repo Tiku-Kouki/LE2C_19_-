@@ -8,17 +8,25 @@
 
 GameOverScene::GameOverScene() {}
 
-GameOverScene::~GameOverScene() {}
+GameOverScene::~GameOverScene() {
+
+delete gameOver_;
+
+}
 
 void GameOverScene::Initialize() {
 	dxCommon_ = DirectXCommon::GetInstance();
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
+
+	uint32_t textureGameOver = TextureManager::Load("gameOver.png");
+	gameOver_ = Sprite::Create(textureGameOver, {640.0f, 360.0f}, {1.0f, 1.0f, 1.0f, 1}, {0.5f, 0.5f});
+
 }
 
 void GameOverScene::Update() {
 
-if (input_->IsPressMouse(0)) {
+if (input_->TriggerKey(DIK_SPACE)) {
 
 		isSceneEnd = true;
 } else
@@ -66,6 +74,8 @@ void GameOverScene::Draw() {
 
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
+
+	gameOver_->Draw();
 
 	/// </summary>
 

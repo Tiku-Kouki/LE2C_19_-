@@ -8,7 +8,12 @@
 
 ClearScene::ClearScene() {}
 
-ClearScene::~ClearScene() {}
+ClearScene::~ClearScene() {
+
+
+delete clear_;
+
+}
 
 void ClearScene::Initialize() {
 
@@ -16,13 +21,19 @@ void ClearScene::Initialize() {
 	dxCommon_ = DirectXCommon::GetInstance();
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
+
+	uint32_t textureClear = TextureManager::Load("clear.png");
+
+	// スプライト生成
+	clear_ = Sprite::Create(textureClear, {640.0f, 360.0f}, {1.0f, 1.0f, 1.0f, 1}, {0.5f, 0.5f});
+
 }
 
 void ClearScene::Update() {
 
 
 	
-	if (input_->IsPressMouse(0)) {
+	if (input_->TriggerKey(DIK_SPACE)) {
 
 		isSceneEnd = true;
 	} else 
@@ -71,6 +82,8 @@ void ClearScene::Draw() {
 
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
+
+	clear_->Draw();
 
 	/// </summary>
 

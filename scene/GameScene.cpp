@@ -28,6 +28,12 @@ GameScene::~GameScene() {
 
 		delete enemy;
 	}
+
+	for (int i = 0; i < 4; i++) {
+	
+	delete lifeUI[i];
+	}
+
 }
 
 void GameScene::Initialize() {
@@ -71,6 +77,12 @@ void GameScene::Initialize() {
 
 	LoadEnemyPopData();
 
+	// レティクル用テクスチャ取得
+	uint32_t lifeTitle = TextureManager::Load("Life.png");
+
+	lifeUI[1] = Sprite::Create(lifeTitle, {18.0f, 38.0f}, {1.0f, 1.0f, 1.0f, 1}, {0.5f, 0.5f});
+	lifeUI[2] = Sprite::Create(lifeTitle, {59.0f, 38.0f}, {1.0f, 1.0f, 1.0f, 1}, {0.5f, 0.5f});
+	lifeUI[3] = Sprite::Create(lifeTitle, {99.0f, 38.0f}, {1.0f, 1.0f, 1.0f, 1}, {0.5f, 0.5f});
 }
 
 void GameScene::Update() {
@@ -82,8 +94,10 @@ void GameScene::Update() {
 
 			return true;
 		}
+
 		return false;
 	});
+
 	// デスフラグの立った弾を削除
 	enemyBullets_.remove_if([](EnemyBullet* bullet) {
 		if (bullet->IsDead()) {
@@ -94,13 +108,7 @@ void GameScene::Update() {
 		return false;
 	});
 
-	if (input_->IsPressMouse(1)) {
-
-		isSceneEnd = true;
-	}else
-	{
-		isSceneEnd = false;
-	}
+	
 
 
 
@@ -122,9 +130,9 @@ void GameScene::Update() {
 
 	if (isGameOver == true || isSceneEnd == true) {
 
-		LoadEnemyPopData();
+		
 	}
-
+	LoadEnemyPopData();
 	
 	UpdataEnemyPopCommands();
 	
@@ -143,7 +151,9 @@ void GameScene::Update() {
 
 	CheckAllCollisions();
 
-	#ifdef _DEBUG
+	callScene();
+
+#ifdef _DEBUG
 
 	if (input_->IsPressMouse(1)) {
 
@@ -151,6 +161,10 @@ void GameScene::Update() {
 	}
 
 #endif // DEBUG
+
+
+
+
 
 	/*ImGui::Begin("camera");
 	ImGui::DragFloat3("Translation", &viewProjection_.translation_.x, 0.01f);
@@ -186,6 +200,7 @@ void GameScene::CheckAllCollisions() {
 			player_->OnColision();
 			// 敵弾の衝突時コールバックを呼び出す
 			bullet->OnColision();
+			playerLife -= 1;
 		}
 	}
 #pragma endregion
@@ -212,6 +227,7 @@ void GameScene::CheckAllCollisions() {
 				// 自弾の衝突時コールバックを呼び出す
 				bullet->OnColision();
 
+				score += 1;
 			}
 		}
 	}
@@ -299,6 +315,21 @@ void GameScene::Draw() {
 	 
 	player_->DrawUI();
 	
+	if (3 <= playerLife) {
+
+		lifeUI[3]->Draw();
+	} 
+	if (2 <= playerLife) {
+
+		lifeUI[2]->Draw();
+	} 
+	if (1 <= playerLife) {
+
+		lifeUI[1]->Draw();
+	}
+
+
+
 	/// </summary>
 
 	// スプライト描画後処理
@@ -412,5 +443,44 @@ void GameScene::UpdataEnemyPopCommands()
 
 
 
+
+}
+
+void GameScene::callScene() 
+{
+	
+	if (playerLife<=0) {
+
+	isGameOver = true;
+	
+	} else
+	{
+	isGameOver = false;
+	}
+
+	if (20 <= score) {
+
+	
+	isSceneEnd = true;
+	
+	}
+	else
+	{
+	isSceneEnd = false;
+	}
+
+
+}
+
+void GameScene::Reset() {
+
+	for (Enemy* enemy : enemys_) {
+		enemy->OnColision();
+	}
+	for (EnemyBullet* bullet : enemyBullets_) {
+		bullet->OnColision();
+	}
+	playerLife = 3;
+	score = 0;
 
 }

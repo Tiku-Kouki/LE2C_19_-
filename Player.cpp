@@ -337,6 +337,7 @@ void Player::GetmMouse(ViewProjection& viewProjection) {
 
 	#ifdef _DEBUG
 	ImGui::Begin("vlayer");
+
 	
 	ImGui::Text(
 	    "vpv:(%f,%f,%f,%f)\n,(%f,%f,%f,%f)\n,(%f,%f,%f,%f)\n,(%f,%f,%f,%f)\n ",

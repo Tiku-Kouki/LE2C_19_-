@@ -91,6 +91,13 @@ public: // メンバ関数
 
 	 SceneType GameOver() { return SceneType::kGameOver; }
 
+
+	 void callScene();
+
+	 void Reset();
+
+
+
  private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
@@ -98,6 +105,9 @@ public: // メンバ関数
 
 	uint32_t textureHandle_ = 0;
 	uint32_t textureHandle2_ = 0;
+
+	Sprite* lifeUI[4] = {nullptr};
+
 
 	Model* model_ = nullptr;
 	Model* playerModel_ = nullptr;
@@ -131,9 +141,9 @@ public: // メンバ関数
 	 // 待機フラグ
 	 bool waitFlag_ = true;
 
-
+	int score = 0;
 	 
-	
+	int playerLife = 3;
 
 
 	/// <summary>

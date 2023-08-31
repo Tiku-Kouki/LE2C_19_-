@@ -13,7 +13,7 @@ TitleScene::TitleScene()
 TitleScene::~TitleScene()
 {
 	delete title_; 
-
+	delete manual_;
 
 
 }
@@ -24,22 +24,30 @@ void TitleScene::Initialize()
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
 
-	
+	// レティクル用テクスチャ取得
+	uint32_t textureTitle = TextureManager::Load("title.png");
+	uint32_t textureManual = TextureManager::Load("manual.png");
 
+	// スプライト生成
+	title_ = Sprite::Create(textureTitle, {640.0f, 360.0f}, {1.0f, 1.0f, 1.0f, 1}, {0.5f, 0.5f});
+	manual_ = Sprite::Create(textureManual, {640.0f, 360.0f}, {1.0f, 1.0f, 1.0f, 1}, {0.5f, 0.5f});
 }
 
 void TitleScene::Update()
 {
 	
 	
-		if (input_->IsPressMouse(0)) {
+		if (input_->TriggerKey(DIK_SPACE) && titleMenu == kTitle) {
 			
-			isSceneEnd = true;
-		} else {
-			isSceneEnd = false;
-		}
+			titleMenu = kManual;
+		}else
 	
-
+		if (input_->TriggerKey(DIK_SPACE) && titleMenu == kManual) {
+		    titleMenu = kTitle;
+		    isSceneEnd = true;
+	    } else {
+		    isSceneEnd = false;
+	    }
 
 }
 
@@ -87,6 +95,17 @@ void TitleScene::Draw()
 	/// ここに前景スプライトの描画処理を追加できる
 
 	
+
+	if (titleMenu == kTitle) {
+
+		  title_->Draw();
+	}
+
+	if ( titleMenu == kManual) {
+
+		   manual_->Draw();
+	} 
+
 
 	/// </summary>
 

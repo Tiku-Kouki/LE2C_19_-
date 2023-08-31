@@ -8,7 +8,7 @@ void PlayerBullet::Initialize(Model* model, const Vector3& position,const Vector
 	assert(model);
 
 	model_ = Model::Create();
-	
+	model = 0;
 
 	textureHandle_ = TextureManager::Load("Blue.png");
 

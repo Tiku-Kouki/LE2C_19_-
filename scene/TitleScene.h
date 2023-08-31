@@ -9,6 +9,13 @@
 #include "WorldTransform.h"
 #include "Scene.h"
 
+enum TitleSceneType {
+	kTitle,
+	kManual,
+	
+};
+
+
 class TitleScene
 {
 
@@ -55,6 +62,9 @@ private: // メンバ変数
 
 	
 	Sprite* title_ = nullptr;
+	Sprite* manual_ = nullptr;
+
+	int titleMenu = kTitle;
 
 };
 

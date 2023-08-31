@@ -25,13 +25,15 @@ void RailCamera::Update() {
 
 	// viewProjection_.UpdateMatrix();
 	// viewProjection_.TransferMatrix();
-
+#ifdef _DEBUG
 	ImGui::Begin("Camera");
 
 	ImGui::DragFloat3("Translation", &worldTransform_.translation_.x, 0.01f);
 	ImGui::DragFloat3("Rotation", &worldTransform_.rotation_.x, 0.01f);
 
 	ImGui::End();
+
+#endif 
 }
 
 RailCamera::~RailCamera() {}
